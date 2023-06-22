@@ -8,4 +8,22 @@
 
 body{
     font-family: 'Roboto', sans-serif;
+    background-color: red;
+}
+
+.container{
+    max-width: 1070px;
+    margin: 3rem auto;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.align-start{
+    align-items: start;
 }
