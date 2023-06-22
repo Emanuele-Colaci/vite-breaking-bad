@@ -8,8 +8,8 @@ export default {
 <template>
     <div class="content d-flex flex-direction align-center" :style="{ backgroundColor: Pokemon.color }">
         <img :src="Pokemon.imageUrl" :alt="Pokemon.name" class="margin-bottom">
-        <div class="margin-bottom">{{ Pokemon.number }}</div>
-        <h4 class="margin-bottom">{{ Pokemon.name }}</h4>
+        <div class="margin-bottom color-white">{{ Pokemon.number }}</div>
+        <h4 class="margin-bottom color-white">{{ Pokemon.name }}</h4>
         <div class="margin-bottom color-grey">{{ Pokemon.type1 }}</div>
     </div>
 </template>

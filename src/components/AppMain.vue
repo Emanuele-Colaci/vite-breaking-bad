@@ -1,9 +1,11 @@
 <script>
 import AppPokemon from './AppPokemon.vue';
 import { store } from '../store.js';
+import AppLoad from './AppLoad.vue';
 export default {
     components:{
-        AppPokemon
+        AppPokemon,
+        AppLoad
     },
     data(){
         return{
@@ -14,13 +16,14 @@ export default {
 </script>
 <template>
     <div>
-        <div class="container grey d-flex">
-            <div class="black d-flex">
+        <div class="container grey d-flex" v-if="store.loading === false">
+            <div class="black d-flex" >
                 <div v-for="(pokemon, index) in store.pokemonList" :key="index" class="pokemon">
                     <AppPokemon :Pokemon="pokemon"/>
                 </div>
             </div>
         </div>
+        <AppLoad v-else/>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -40,5 +43,28 @@ export default {
                 width: calc(100% / 5 - 20px);
             }
         }
+    }
+
+    @media screen and (max-width: 835px){
+        .grey{
+            .black{
+                .pokemon{
+                        width: calc(100% / 3 - 20px);
+                }
+    
+            }
+        }
+
+    }
+    @media screen and (max-width: 560px){
+        .grey{
+            .black{
+                .pokemon{
+                        width: calc(100% / 2 - 20px);
+                }
+    
+            }
+        }
+
     }
 </style>
