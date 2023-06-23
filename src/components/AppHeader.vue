@@ -15,7 +15,6 @@ export default {
                 "Flying",
                 "Ghost",
                 "Grass",
-                "Green",
                 "Ground",
                 "Ice",
                 "Normal",
@@ -27,6 +26,11 @@ export default {
                 "White",
                 "Yellow"
             ]
+        }
+    },
+    methods: {
+        search() {
+            this.$emit('search');
         }
     }
 }
@@ -48,7 +52,7 @@ export default {
             </div>
         </div>
         <div>
-            <select v-model="store.pokemonType" @change="$emit('search')">
+            <select v-model="store.pokemonType" @change="search">
                 <option value="" selected>Seleziona stato</option>
                 <option v-for="(type, index) in types" :key="index" :value="type">{{ type }}</option>
             </select>

@@ -2,7 +2,7 @@
 export default {
     props:{
         Pokemon: Object
-    }
+    },
 }
 </script>
 <template>

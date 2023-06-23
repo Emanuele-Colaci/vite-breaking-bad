@@ -16,12 +16,12 @@ export default {
     mounted(){
         this.apiPokemon()
     },
-    methods:{
+    computed:{
       apiPokemon(){
           let myUrl = store.apiUrl
 
-          if(this.pokemonType !== ''){
-              myUrl += `&eq[type1]=${store.pokemonType} `
+          if(this.store.pokemonType !== ''){
+              myUrl += `&eq[type1]=${this.store.pokemonType} `
           }
 
           axios.get(myUrl).then((pokemon) => {
