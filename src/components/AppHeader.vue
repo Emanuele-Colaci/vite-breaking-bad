@@ -1,21 +1,57 @@
 <script>
+import { store } from '../store.js';
 export default {
-    
+    data(){
+        return{
+            store,
+            types: [
+                "Bug",
+                "Dark",
+                "Dragon",
+                "Electric",
+                "Fairy",
+                "Fighting",
+                "Fire",
+                "Flying",
+                "Ghost",
+                "Grass",
+                "Green",
+                "Ground",
+                "Ice",
+                "Normal",
+                "Poison",
+                "Psychic",
+                "Rock",
+                "Steel",
+                "Water",
+                "White",
+                "Yellow"
+            ]
+        }
+    }
 }
 </script>
 <template>
-    <div class="container d-flex align-start">
-        <div class="blue">
-            
+    <div class="container d-flex align-start justify-between">
+        <div>
+            <div class="blue">
+                
+            </div>
+            <div class="red">
+                
+            </div>
+            <div class="yellow">
+        
+            </div>
+            <div class="green">
+        
+            </div>
         </div>
-        <div class="red">
-            
-        </div>
-        <div class="yellow">
-    
-        </div>
-        <div class="green">
-    
+        <div>
+            <select v-model="store.pokemonType" @change="$emit('search')">
+                <option value="" selected>Seleziona stato</option>
+                <option v-for="(type, index) in types" :key="index" :value="type">{{ type }}</option>
+            </select>
         </div>
     </div>
 </template>

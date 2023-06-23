@@ -14,16 +14,27 @@ export default {
         }
     },
     mounted(){
-        axios.get(store.apiUrl).then((pokemon) => {
-            store.pokemonList = pokemon.data.docs;
-            store.loading = false
-        })
+        this.apiPokemon()
+    },
+    methods:{
+      apiPokemon(){
+          let myUrl = store.apiUrl
+
+          if(this.pokemonType !== ''){
+              myUrl += `&eq[type1]=${store.pokemonType} `
+          }
+
+          axios.get(myUrl).then((pokemon) => {
+              store.pokemonList = pokemon.data.docs;
+              store.loading = false
+          })
+      }
     }
 }
 </script>
 <template>
   <div>
-    <AppHeader />
+    <AppHeader @search="apiPokemon"/>
     <AppMain />
   </div>
 </template>
