@@ -14,14 +14,18 @@ export default {
         }
     },
     mounted(){
-        this.apiPokemon()
+      this.apiPokemon()
     },
-    computed:{
+    methods:{
       apiPokemon(){
           let myUrl = store.apiUrl
 
           if(this.store.pokemonType !== ''){
               myUrl += `&eq[type1]=${this.store.pokemonType} `
+          }
+
+          if(this.store.pokemonText !== ''){
+            myUrl += `&q[name]=${this.store.pokemonText} `
           }
 
           axios.get(myUrl).then((pokemon) => {

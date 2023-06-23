@@ -52,6 +52,9 @@ export default {
             </div>
         </div>
         <div>
+            <input type="text" v-model="store.pokemonText" placeholder="Pokemon" @keyup.enter="$emit('search')">
+        </div>
+        <div>
             <select v-model="store.pokemonType" @change="search">
                 <option value="" selected>Seleziona stato</option>
                 <option v-for="(type, index) in types" :key="index" :value="type">{{ type }}</option>
