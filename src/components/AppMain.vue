@@ -1,6 +1,7 @@
 <script>
 import AppPokemon from './AppPokemon.vue';
 import { store } from '../store.js';
+import axios from 'axios';
 import AppLoad from './AppLoad.vue';
 import AppMessage from './App.message.vue';
 export default {
@@ -13,7 +14,21 @@ export default {
         return{
             store
         }
-    }
+    },
+    methods: {
+        page(){
+            let myUrl = store.apiUrl
+            myUrl += `&page=${this.store.pokemonPage}`
+            axios.get(myUrl).then((pokemon) => {
+              store.pokemonList = pokemon.data.docs;
+              store.loading = false
+            })
+
+            if(this.store.pokemonPage < 1 || this.store.pokemonPage > 105){
+                alert('Inserisci solo un numero da 1 a 105');
+            }
+        }
+    },
 }
 </script>
 <template>
@@ -24,7 +39,7 @@ export default {
                     <AppPokemon :Pokemon="pokemon"/>
                 </div>
             </div>
-            <AppMessage />
+            <AppMessage @search="page"/>
         </div>
         <AppLoad v-else/>
     </div>
