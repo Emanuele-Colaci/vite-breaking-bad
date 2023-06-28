@@ -32,6 +32,49 @@ export default {
               store.pokemonList = pokemon.data.docs;
               store.loading = false
           })
+      },
+      nextPage(){
+           let pageNext= store.pageString + store.current_page
+        if(store.current_page <= store.totalPages){
+          store.current_page++
+            
+          let pageUrl = store.apiUrl + pageNext
+           
+          console.log(pageUrl)
+          axios.get(pageUrl).then((response)=> {
+            store.pokemonList = response.data.docs})
+            store.loading = false
+            return pageUrl, pageNext
+        }else{
+            store.current_page= store.minPage
+            let pageUrl = store.apiUrl + store.pageString + store.current_page
+            
+            axios.get(pageUrl).then((response)=> {
+              store.pokemonList = response.data.docs})
+              store.loading = false
+              return pageUrl
+        }
+      },
+      //pagina precedente
+      prevPage(pageUrl){
+        if(store.current_page <= store.minPage){
+          let last_page = store.totalPages
+          last_page--
+          store.current_page = store.totalPages
+          let pagePrev = store.pageString + last_page
+          pageUrl = store.apiUrl + pagePrev
+          axios.get(pageUrl).then((response)=> {
+            store.pokemonList = response.data.docs})
+            store.loading = false
+          return  pagePrev, store.myUrl, pageUrl, last_page
+        }else{
+          store.current_page--
+          let pagePrev =store.pageString+ store.current_page
+          pageUrl= store.apiUrl + pagePrev
+          axios.get(pageUrl).then((response)=> {
+            store.pokemonList = response.data.docs})
+            store.loading = false
+        }
       }
     }
 }
@@ -39,7 +82,7 @@ export default {
 <template>
   <div>
     <AppHeader @search="apiPokemon"/>
-    <AppMain />
+    <AppMain @next_page="nextPage" @prev_page="prevPage"/>
   </div>
 </template>
 <style lang="scss">
